@@ -33,6 +33,7 @@ public class JwtFilter extends OncePerRequestFilter {
     @Autowired
     private UserService userservice;
     @Value("${jwt.secret}")
+
     private String secret;
     private String bearer =  "Bearer ";
     private String autorization =  "Authorization" ;
@@ -40,10 +41,11 @@ public class JwtFilter extends OncePerRequestFilter {
     private String getToken(HttpServletRequest request) {
 
         String authorizationHeader = request.getHeader(this.autorization);
-        logger.error("a evaluar authorizationHeader : "  + authorizationHeader);
+
         if(authorizationHeader != null && authorizationHeader.startsWith(this.bearer)){
             return   authorizationHeader.substring(this.bearer.length());  
          }
+
         return null;
     }
 
@@ -52,47 +54,33 @@ public class JwtFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response
                 , FilterChain filterChain) throws ServletException, IOException {
 
-        logger.error("a filtrar: " + request + " y  "+  response + " y " +filterChain);
- 
-    try{
+        try{
 
-        String username = "";
-        String token = getToken(request);
+            String username = "";
+            String token = getToken(request);
 
-        logger.error("a filtrar token : " + token);
+            if(token!=null && jwtutility.validateTokenEstructure(token)){
+                username = jwtutility.getUserNameFromToken(token);
+            }
+            
+            if(username != null &&  SecurityContextHolder.getContext().getAuthentication()==null){
+            
+                UserDetails userDetails =  userservice.loadUserByUsername(username);
 
-        if(token!=null && jwtutility.validateTokenEstructure(token)){
-            username = jwtutility.getUserNameFromToken(token);
-        }
-
-        logger.error("a evaluar: " +username +  " y " + SecurityContextHolder.getContext().getAuthentication());
-        
-        if(username != null &&  SecurityContextHolder.getContext().getAuthentication()==null){
-           
-            UserDetails userDetails =  userservice.loadUserByUsername(username);
-
-            logger.error("a userdetails: " +userDetails);
-            if(jwtutility.validateToken(token, userDetails)){
-                
-                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = 
-                                    new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
-                
-                logger.error("obtengo el : usernamePasswordAuthenticationToken " +usernamePasswordAuthenticationToken);
-
-                usernamePasswordAuthenticationToken.setDetails( new WebAuthenticationDetailsSource().buildDetails(request));
-
-                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                if(jwtutility.validateToken(token, userDetails)){
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = 
+                            new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken.setDetails( new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                }
             }
 
+        }catch(Exception e){
+            
+            logger.error("Error de filtrar Request: " + e.getMessage() );
         }
 
-    }catch(Exception e){
-
-    }
-        
-        
-
-        filterChain.doFilter(request, response);
+            filterChain.doFilter(request, response);
         
     }
     

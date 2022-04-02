@@ -68,27 +68,18 @@ public class JwtUtility {
     }
     public String generateTokenUserName(String username){
         Map<String, Object> claims = new HashMap<>();
-        claims.put("user", "User");
+        //claims.put("user", "User");
         return doGenerateToken(claims, username);
     }
     private String doGenerateToken(Map<String, Object> claims, String subject){
 
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
         long nowMillis = System.currentTimeMillis();
-        Date now = new Date(nowMillis);
-        String id ="123";
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary(this.secret);
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-
-
-        logger.error("se genero : " + id + ", " +  now + "," + nowMillis) ;
-
-
         JwtBuilder builder = Jwts.builder()
         .setSubject(subject)				
         .signWith(signatureAlgorithm, signingKey);
-
-        logger.error("se genero : " + builder);
 
         if (this.expiration >= 0) {
             long expMillis = nowMillis + this.expiration;

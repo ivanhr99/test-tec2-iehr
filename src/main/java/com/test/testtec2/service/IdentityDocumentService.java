@@ -22,33 +22,23 @@ public class IdentityDocumentService {
     public IdentityDocument findById(String id) {
 
         IdentityDocument identityDocumenttemp = null;
-
         Optional<IdentityDocument> result = identityDocumentRepository.findById(id);
+        if(result.isPresent()) identityDocumenttemp =  result.get();
 
-        if(result.isPresent()){
-            identityDocumenttemp =  result.get();
-        }
-        
         return identityDocumenttemp;
-
-         
     }
 
 
     public IdentityDocument createIdentityDocument(IdentityDocument identityDocument){
-
-        return identityDocumentRepository.save(identityDocument);
+       return identityDocumentRepository.save(identityDocument);
     }
 
     public IdentityDocument updateIdentityDocument(IdentityDocument identityDocument){
-
-
         return identityDocumentRepository.save(identityDocument);
     }
 
 
     public void deleteIdentityDocument(String id){
-
          identityDocumentRepository.deleteById(id);
     }
 

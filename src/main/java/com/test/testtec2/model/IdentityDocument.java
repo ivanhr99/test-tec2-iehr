@@ -12,17 +12,13 @@ import org.springframework.data.annotation.Id;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
 
 @Data
 @NoArgsConstructor
 @ToString
-@Getter
-@Setter
 
 public class IdentityDocument   {
 

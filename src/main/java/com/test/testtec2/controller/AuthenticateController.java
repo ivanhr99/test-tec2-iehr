@@ -26,8 +26,6 @@ public class AuthenticateController {
 
     @PostMapping("/authenticate")
     public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) throws Exception{
-
-        logger.error("las  credencial: " + jwtRequest.getUsername() + " y  "+  jwtRequest.getPassword());
         
         try {
             
@@ -36,15 +34,17 @@ public class AuthenticateController {
                 jwtRequest.getUsername(), 
                 jwtRequest.getPassword())
                 );
+
         } catch (Exception e) {
+
             logger.error("Fallo el credencial: " + e.getMessage());
             throw new Exception("INVALID_CREDENTIALS", e);
+
         }
 
-        //final UserDetails userDetails =  userDetailsService.loadUserByUsername(jwtRequest.getUsername());
-        logger.error("a generar el token con  " + jwtRequest.getUsername() );
         final String token = jwtUtility.generateTokenUserName(jwtRequest.getUsername());
-        logger.error("el token con  " + token );
+
+
         return new JwtResponse(token);
     }
 }
