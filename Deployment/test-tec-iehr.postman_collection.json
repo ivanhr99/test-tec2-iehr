@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "1c4bf79e-f264-4d62-a4ce-6145c7475b58",
+		"name": "test-tec-iehr",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetIdentitDocuments",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg5Mjk1NjF9.d_Yxo3tnK9vN-cQJXgJN-rkhm7VA_TdQOfb3ihGBlYo",
+						"type": "text"
+					},
+					{
+						"key": "dgdgd",
+						"value": "fdgfg",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/identitydocuments",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"identitydocuments"
+					],
+					"query": [
+						{
+							"key": "Authorization",
+							"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg4NjkwMzh9.6oPPK1LYGXx9gsZVTsUgjuYhDGTiBA-KvdWNBmGm-Po",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PostIdentityDocuments",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg5Mjk1NjF9.d_Yxo3tnK9vN-cQJXgJN-rkhm7VA_TdQOfb3ihGBlYo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n \"number\": \"8956523200\",\r\n \"expiryDate\": \"09/30\",\r\n \"emissionDate\": \"2021-05-17T00:00:00.000Z\",\r\n \"documentType\": {\r\n \"code\": \"CI\",\r\n \"name\": \"Cédula de identidad.\"\r\n }\r\n }\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/identitydocuments"
+			},
+			"response": []
+		},
+		{
+			"name": "PutIdentityDocuments",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg5Mjk1NjF9.d_Yxo3tnK9vN-cQJXgJN-rkhm7VA_TdQOfb3ihGBlYo",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg5MTcwOTF9.NEQ9WwckN5eBe0p7eB3vVyDdIKZsyjNoKw08rgg85YI",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"6248a1d5ead4924a5336775c\",\r\n    \"number\": \"1123809332\",\r\n    \"expiryDate\": \"19/25\",\r\n    \"emissionDate\": \"2021-12-17T00:00:00.000+00:00\",\r\n    \"documentType\": {\r\n        \"code\": \"CI\",\r\n        \"name\": \"Cédula de identidad.\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/identitydocuments/6248a1d5ead4924a5336775cg"
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteIdentityDocuments",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJJdmFuaHIiLCJleHAiOjE2NDg5Mjk1NjF9.d_Yxo3tnK9vN-cQJXgJN-rkhm7VA_TdQOfb3ihGBlYo",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:8080/identitydocuments/62486f0ab05b0a79a10fb6ea",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"identitydocuments",
+						"62486f0ab05b0a79a10fb6ea"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetToken",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"Ivanhr\",\r\n    \"password\" : \"Pa$$w0rd\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/authenticate"
+			},
+			"response": []
+		}
+	]
+}

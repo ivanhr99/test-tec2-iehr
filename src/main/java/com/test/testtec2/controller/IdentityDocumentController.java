@@ -3,8 +3,7 @@ package com.test.testtec2.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
+
 import javax.validation.Valid;
 
 import com.test.testtec2.model.IdentityDocument;
